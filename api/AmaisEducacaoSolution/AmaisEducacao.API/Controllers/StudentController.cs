@@ -54,6 +54,9 @@ namespace AmaisEducacao.API.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                
                 var createdStudent = await _studentService.CreateStudentAsync(student);
 
                 if (createdStudent == null)
@@ -62,7 +65,7 @@ namespace AmaisEducacao.API.Controllers
 
                 return CreatedAtAction("GetStudent", new { registrationNumber = createdStudent.RA }, createdStudent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error. Please contact support.");
             }

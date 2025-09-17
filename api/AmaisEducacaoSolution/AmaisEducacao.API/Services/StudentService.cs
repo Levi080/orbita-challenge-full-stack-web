@@ -30,10 +30,13 @@ namespace AmaisEducacao.API.Services
 
         public async Task<Student> CreateStudentAsync(Student student)
         {
-            var existingStudent = await _studentRepository.GetStudentByRAAsync(student.RA);
+            var existingStudentWithRA = await _studentRepository.GetStudentByRAAsync(student.RA);
+            var existingStudentWithCPF = await _studentRepository.ExistsByCPFAsync(student.CPF);
 
-            if (existingStudent != null)
+            if (existingStudentWithRA != null || existingStudentWithCPF)
                 return null;
+
+            student.CreationDate = DateTime.UtcNow;
 
             await _studentRepository.AddStudentAsync(student);
 
@@ -45,7 +48,7 @@ namespace AmaisEducacao.API.Services
             var existingStudent = await _studentRepository.GetStudentByRAAsync(student.RA);
 
             if (existingStudent == null)
-                return null;           
+                return null;
 
             existingStudent.Name = student.Name;
             existingStudent.Email = student.Email;

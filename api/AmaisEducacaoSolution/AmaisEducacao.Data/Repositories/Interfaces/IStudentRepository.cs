@@ -12,6 +12,8 @@ namespace AmaisEducacao.Data.Repositories.Interfaces
 
         Task UpdateStudentAsync(Student student);
 
+        Task<bool> ExistsByCPFAsync(string cpf);
+
         Task DeleteStudentAsync(Student student);
     }
 }
