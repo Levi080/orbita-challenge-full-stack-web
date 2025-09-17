@@ -37,6 +37,7 @@ namespace AmaisEducacao.API.Services
                 return null;
 
             student.CreationDate = DateTime.UtcNow;
+            student.UpdateDate = DateTime.UtcNow;
 
             await _studentRepository.AddStudentAsync(student);
 
@@ -52,6 +53,7 @@ namespace AmaisEducacao.API.Services
 
             existingStudent.Name = student.Name;
             existingStudent.Email = student.Email;
+            existingStudent.UpdateDate = DateTime.UtcNow;
 
             await _studentRepository.UpdateStudentAsync(existingStudent);
             return existingStudent;

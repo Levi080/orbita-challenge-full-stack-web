@@ -36,7 +36,6 @@ namespace AmaisEducacao.Data.Repositories
 
         public async Task UpdateStudentAsync(Student student)
         {
-            _amaisEducacaoContext.Student.Update(student);
             await _amaisEducacaoContext.SaveChangesAsync();
         }
 
@@ -50,9 +49,6 @@ namespace AmaisEducacao.Data.Repositories
         public async Task DeleteStudentAsync(Student student)
         {
             student.DeletionDate = DateTime.UtcNow;
-
-            _amaisEducacaoContext.Student.Update(student);
-
             await _amaisEducacaoContext.SaveChangesAsync();
         }
     }
