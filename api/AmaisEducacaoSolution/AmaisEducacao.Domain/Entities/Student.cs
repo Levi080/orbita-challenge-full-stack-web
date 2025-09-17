@@ -9,7 +9,7 @@ namespace AmaisEducacao.Domain.Entities
 
         public string Email { get; set; }
 
-        public string RegistrationNumber { get; set; }
+        public string RA { get; set; }
 
         public string CPF { get; set; }
     }
