@@ -5,19 +5,16 @@
         Consulta de Alunos
       </v-card-title>
       <v-row class="mt-4" align="center">
-
         <v-col cols="12" md="6">
           <v-text-field label="Pesquise por aluno" outlined dense hide-details>
-
             <template v-slot:append-inner>
               <v-btn color="primary" class="ml-2">
+                <v-icon>mdi-magnify</v-icon>
                 Pesquisar
               </v-btn>
             </template>
-
           </v-text-field>
         </v-col>
-
         <v-col class="d-flex">
           <v-spacer></v-spacer>
           <v-btn color="primary" @click="navigateToStudentForm">
@@ -25,11 +22,8 @@
             Cadastrar Aluno
           </v-btn>
         </v-col>
-
       </v-row>
-
       <v-divider class="my-4"></v-divider>
-
       <v-data-table :headers="headersOfTable" :items="studentStore.students" :loading="studentStore.loading"
         class="elevation-1">
         <template v-slot:[`item.actions`]="{ item }">
@@ -37,12 +31,10 @@
           <v-btn icon="mdi-delete" size="small" color="error" @click="showConfirmDialog(item)"> </v-btn>
         </template>
       </v-data-table>
-
       <v-alert v-if="studentStore.error" type="error" class="mt-4">
         {{ studentStore.error }}
       </v-alert>
     </v-card>
-
     <ConfirmDialog ref="confirmDialog" title="Confirmação de Exclusão" :message="dialogMessage"
       @confirm="deleteStudent" />
   </v-container>
@@ -80,7 +72,7 @@ const editStudent = (student) => {
 };
 
 const showConfirmDialog = (student) => {
-  dialogMessage.value = `Tem certeza que deseja excluir o aluno ${student.name}?`;
+  dialogMessage.value = `Tem certeza que deseja excluir o aluno <strong>${student.name}</strong>?`;
   confirmDialog.value.open(student);
 };
 

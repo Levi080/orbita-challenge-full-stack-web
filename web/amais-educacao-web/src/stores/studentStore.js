@@ -37,7 +37,6 @@ export const useStudentStore = defineStore("student", {
     },
     async createStudent(student) {
       this.loading = true;
-      this.error = null;
       try {
         await axios.post(
           `${process.env.VUE_APP_API_URL}/Student/CreateStudent`,
@@ -46,15 +45,13 @@ export const useStudentStore = defineStore("student", {
         await this.getStudentsList();
         this.showToast("Aluno cadastrado com sucesso!", "success");
       } catch (error) {
-        this.error = "Ocorreu um erro ao criar o aluno.";
-        this.showToast(this.error, "error");
+        this.showToast(error, "error");
       } finally {
         this.loading = false;
       }
     },
     async updateStudent(student) {
       this.loading = true;
-      this.error = null;
       try {
         await axios.put(
           `${process.env.VUE_APP_API_URL}/Student/UpdateStudent`,
@@ -63,15 +60,13 @@ export const useStudentStore = defineStore("student", {
         await this.getStudentsList();
         this.showToast("Aluno atualizado com sucesso!", "success");
       } catch (error) {
-        this.error = "Ocorreu um erro ao atualizar o aluno.";
-        this.showToast(this.error, "error");
+        this.showToast(error, "error");
       } finally {
         this.loading = false;
       }
     },
     async deleteStudent(ra) {
       this.loading = true;
-      this.error = null;
       try {
         await axios.delete(
           `${process.env.VUE_APP_API_URL}/Student/DeleteStudent?ra=${ra}`
@@ -79,8 +74,7 @@ export const useStudentStore = defineStore("student", {
         await this.getStudentsList();
         this.showToast("Aluno excluído com sucesso!", "success");
       } catch (error) {
-        this.error = "Ocorreu um erro ao excluir o aluno.";
-        this.showToast(this.error, "error");
+        this.showToast(error, "error");
       } finally {
         this.loading = false;
       }

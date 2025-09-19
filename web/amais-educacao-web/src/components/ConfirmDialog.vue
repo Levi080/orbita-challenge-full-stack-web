@@ -4,15 +4,16 @@
       <v-card-title class="headline">
         {{ title }}
       </v-card-title>
-      <v-card-text>
-        {{ message }}
+      <v-card-text v-html="message">
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="secondary" @click="cancel">
+        <v-btn color="red" variant="elevated" @click="cancel">
+          <v-icon left>mdi-cancel</v-icon>
           Cancelar
         </v-btn>
-        <v-btn color="error" @click="confirm">
+        <v-btn color="primary" variant="elevated" @click="confirm">
+          <v-icon left>mdi-content-save</v-icon>
           Excluir
         </v-btn>
       </v-card-actions>
