@@ -28,41 +28,44 @@
 
       <v-divider class="my-4"></v-divider>
 
-      <v-data-table :headers="headersOfTable" :items="students" :loading="loading" class="elevation-1">
-      <template v-slot:[`item.actions`]="{ item }">
-        <v-btn color="primary" class="mr-2" @click="editStudent(item)">
-          Editar
-        </v-btn>
-        <v-btn color="error" @click="deleteStudent(item)">
-          Excluir
-        </v-btn>
-      </template>
+      <v-data-table :headers="headersOfTable" :items="studentStore.students" :loading="studentStore.loading"
+        class="elevation-1">
+        <template v-slot:[`item.actions`]="{ item }">
+          <v-btn color="primary" class="mr-2" @click="editStudent(item)">
+            Editar
+          </v-btn>
+          <v-btn color="error" @click="showConfirmDialog(item)">
+            Excluir
+          </v-btn>
+        </template>
       </v-data-table>
 
-      <v-alert v-if="error" type="error" class="mt-4">
-        {{ error }}
+      <v-alert v-if="studentStore.error" type="error" class="mt-4">
+        {{ studentStore.error }}
       </v-alert>
-
     </v-card>
+
+    <ConfirmDialog ref="confirmDialog" title="Confirmação de Exclusão" :message="dialogMessage"
+      @confirm="deleteStudent" />
   </v-container>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useStudentStore } from '@/stores/studentStore';
-import { storeToRefs } from 'pinia';
+import ConfirmDialog from '@/components/ConfirmDialog.vue';
 
 const router = useRouter();
 const studentStore = useStudentStore();
-
-const { students, loading, error } = storeToRefs(studentStore);
+const confirmDialog = ref(null);
+const dialogMessage = ref('');
 
 const headersOfTable = [
   { title: 'Registro Acadêmico', key: 'ra' },
   { title: 'Nome', key: 'name' },
-  { title: 'CPF', key: 'cpf' }
-  // { title: 'Ações', key: 'actions', sortable: false }
+  { title: 'CPF', key: 'cpf' },
+  { title: 'Ações', key: 'actions', sortable: false }
 ];
 
 const navigateToStudentForm = () => {
@@ -71,8 +74,21 @@ const navigateToStudentForm = () => {
 
 onMounted(() => {
   studentStore.getStudentsList();
-  console.log('CONTEUDO DO STATE:', students)
 });
+
+const editStudent = (student) => {
+  studentStore.setStudentSelected(student)
+  router.push({ name: 'StudentForm' });
+};
+
+const showConfirmDialog = (student) => {
+  dialogMessage.value = `Tem certeza que deseja excluir o aluno ${student.name}?`;
+  confirmDialog.value.open(student);
+};
+
+const deleteStudent = async (student) => {
+  await studentStore.deleteStudent(student.ra);
+};
 
 </script>
 

@@ -28,8 +28,10 @@
         <router-view></router-view>
       </v-container>
     </v-main>
+    <ToastNotification />
   </v-app>
 </template>
 
 <script setup>
+import ToastNotification from '@/components/ToastNotification.vue';
 </script>
