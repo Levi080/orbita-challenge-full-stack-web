@@ -1,10 +1,14 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title>Gestão de Alunos</v-toolbar-title>
+      <v-toolbar-title class="d-flex align-center">
+        <span class="ml-2">Gestão de Alunos</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-img :src="require('@/assets/logo_amaiseducacao.png')"  alt="Logo da Empresa" max-height="50" max-width="130" contain></v-img>
     </v-app-bar>
 
-    <v-navigation-drawer app>
+    <v-navigation-drawer app width="300">
       <v-list-item>
         <v-list-item-title class="text-h6">
           Módulo Acadêmico

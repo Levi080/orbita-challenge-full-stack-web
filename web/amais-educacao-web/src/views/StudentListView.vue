@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="pa-4">
+    <v-card class="pa-4 px-10">
       <v-card-title class="headline">
         Consulta de Alunos
       </v-card-title>
@@ -18,8 +18,10 @@
           </v-text-field>
         </v-col>
 
-        <v-col cols="12" md="2" class="d-flex justify-end">
-          <v-btn color="primary" block @click="navigateToStudentForm">
+        <v-col class="d-flex">
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="navigateToStudentForm">
+            <v-icon left>mdi-plus</v-icon>
             Cadastrar Aluno
           </v-btn>
         </v-col>
@@ -31,12 +33,8 @@
       <v-data-table :headers="headersOfTable" :items="studentStore.students" :loading="studentStore.loading"
         class="elevation-1">
         <template v-slot:[`item.actions`]="{ item }">
-          <v-btn color="primary" class="mr-2" @click="editStudent(item)">
-            Editar
-          </v-btn>
-          <v-btn color="error" @click="showConfirmDialog(item)">
-            Excluir
-          </v-btn>
+          <v-btn icon="mdi-pencil" size="small" color="primary" class="mr-2" @click="editStudent(item)"> </v-btn>
+          <v-btn icon="mdi-delete" size="small" color="error" @click="showConfirmDialog(item)"> </v-btn>
         </template>
       </v-data-table>
 
@@ -65,7 +63,7 @@ const headersOfTable = [
   { title: 'Registro Acadêmico', key: 'ra' },
   { title: 'Nome', key: 'name' },
   { title: 'CPF', key: 'cpf' },
-  { title: 'Ações', key: 'actions', sortable: false }
+  { title: 'Ações', key: 'actions', sortable: false, align: 'center' }
 ];
 
 const navigateToStudentForm = () => {

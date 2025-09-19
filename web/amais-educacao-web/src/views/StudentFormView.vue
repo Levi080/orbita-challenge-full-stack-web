@@ -1,25 +1,25 @@
 <template>
     <v-container>
-        <v-card class="pa-4">
+        <v-card class="pa-4 px-10">
             <v-card-title class="headline">
                 Cadastro de aluno
             </v-card-title>
             <v-form ref="form" v-model="valid" lazy-validation>
                 <v-container>
                     <v-row>
-                        <v-col cols="12">
+                        <v-col cols="12" md="4">
                             <v-text-field v-model="student.name" label="Nome" placeholder="Informe o nome completo"
                                 outlined dense required></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" md="4">
                             <v-text-field v-model="student.email" label="E-mail" placeholder="Informe apenas um e-mail"
                                 outlined dense required></v-text-field>
                         </v-col>
-                        <v-col cols="12" >
+                        <v-col cols="12" md="4">
                             <v-text-field :disabled="isEditing" v-model="student.ra" label="RA" placeholder="Informe o registro acadêmico"
                                 outlined dense required></v-text-field>
                         </v-col>
-                        <v-col cols="12">
+                        <v-col cols="12" md="4">
                             <v-text-field :disabled="isEditing" v-model="student.cpf" label="CPF" placeholder="Informe o número do documento"
                                 outlined dense required></v-text-field>
                         </v-col>
