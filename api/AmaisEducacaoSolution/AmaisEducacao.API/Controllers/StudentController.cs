@@ -42,7 +42,7 @@ namespace AmaisEducacao.API.Controllers
 
                 return Ok(student);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(500, "Internal Server Error. Please contact support.");
             }
