@@ -68,11 +68,9 @@ onMounted(() => {
 });
 
 const search = () => {
-  // Chama a nova action para buscar os alunos por nome
   if (searchQuery.value) {
     studentStore.searchStudents(searchQuery.value);
   } else {
-    // Se o campo de pesquisa estiver vazio, carrega a lista completa
     studentStore.getStudentsList();
   }
 };

@@ -61,9 +61,8 @@ namespace AmaisEducacao.API.Controllers
 
                 if (createdStudent == null)
                     return BadRequest("Registration number or CPF already exists.");
-                
 
-                return CreatedAtAction("GetStudent", new { registrationNumber = createdStudent.RA }, createdStudent);
+                return Ok(createdStudent);
             }
             catch (Exception ex)
             {

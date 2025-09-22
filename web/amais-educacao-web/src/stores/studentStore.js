@@ -38,12 +38,12 @@ export const useStudentStore = defineStore("student", {
     async createStudent(student) {
       this.loading = true;
       try {
-        await axios.post(
+         await axios.post(
           `${process.env.VUE_APP_API_URL}/Student/CreateStudent`,
-          student
+          student        
         );
-        await this.getStudentsList();
-        this.showToast("Aluno cadastrado com sucesso!", "success");
+          await this.getStudentsList();
+          this.showToast("Aluno cadastrado com sucesso!", "success");
       } catch (error) {
         this.showToast(error, "error");
       } finally {
