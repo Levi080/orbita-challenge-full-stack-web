@@ -1,6 +1,6 @@
 ﻿using AmaisEducacao.API.Services.Interfaces;
-using AmaisEducacao.Data.Repositories.Interfaces;
 using AmaisEducacao.Domain.Entities;
+using AmaisEducacao.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace AmaisEducacao.API.Services
@@ -68,6 +68,11 @@ namespace AmaisEducacao.API.Services
 
             await _studentRepository.DeleteStudentAsync(student);
             return true;
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsByNameAsync(string name)
+        {
+            return await _studentRepository.GetStudentsByNameAsync(name);
         }
     }
 }

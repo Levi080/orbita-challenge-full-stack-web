@@ -1,6 +1,6 @@
 ﻿using AmaisEducacao.Domain.Entities;
 
-namespace AmaisEducacao.Data.Repositories.Interfaces
+namespace AmaisEducacao.Domain.Repositories.Interfaces
 {
     public interface IStudentRepository
     {
@@ -15,5 +15,7 @@ namespace AmaisEducacao.Data.Repositories.Interfaces
         Task<bool> ExistsByCPFAsync(string cpf);
 
         Task DeleteStudentAsync(Student student);
+
+        Task<IEnumerable<Student>> GetStudentsByNameAsync(string name);
     }
 }

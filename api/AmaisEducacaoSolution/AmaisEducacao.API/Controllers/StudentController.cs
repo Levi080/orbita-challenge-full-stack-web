@@ -1,6 +1,7 @@
 ﻿using AmaisEducacao.API.Services.Interfaces;
 using AmaisEducacao.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 namespace AmaisEducacao.API.Controllers
 {
@@ -30,17 +31,16 @@ namespace AmaisEducacao.API.Controllers
         }
 
 
-        [HttpGet("GetStudent")]
-        public async Task<ActionResult<Student>> GetStudent([FromQuery] string ra)
+        [HttpGet("GetStudentsByNameAsync")]
+        public async Task<ActionResult<Student>> GetStudentsByNameAsync([FromQuery] string name)
         {
             try
             {
-                var student = await _studentService.GetStudentByRAAsync(ra);
-
-                if (student == null)
-                    return NotFound();
-
-                return Ok(student);
+                if (string.IsNullOrEmpty(name))
+                    return BadRequest("O parâmetro 'name' é obrigatório para esta busca.");
+                
+                var students = await _studentService.GetStudentsByNameAsync(name);
+                return Ok(students);
             }
             catch (Exception ex)
             {

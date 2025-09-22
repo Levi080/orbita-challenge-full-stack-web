@@ -1,6 +1,6 @@
 ﻿using AmaisEducacao.Data.Context;
-using AmaisEducacao.Data.Repositories.Interfaces;
 using AmaisEducacao.Domain.Entities;
+using AmaisEducacao.Domain.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace AmaisEducacao.Data.Repositories
@@ -50,6 +50,13 @@ namespace AmaisEducacao.Data.Repositories
         {
             student.DeletionDate = DateTime.UtcNow;
             await _amaisEducacaoContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsByNameAsync(string name)
+        {
+            return await _amaisEducacaoContext.Student
+                                 .Where(s => s.Name.ToLower().Contains(name.ToLower()) && s.DeletionDate == null)
+                                 .ToListAsync();
         }
     }
 }

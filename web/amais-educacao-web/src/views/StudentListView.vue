@@ -6,9 +6,9 @@
       </v-card-title>
       <v-row class="mt-4" align="center">
         <v-col cols="12" md="6">
-          <v-text-field label="Pesquise por aluno" outlined dense hide-details>
+          <v-text-field label="Pesquise por nome de aluno" outlined dense hide-details v-model="searchQuery">
             <template v-slot:append-inner>
-              <v-btn color="primary" class="ml-2">
+              <v-btn color="primary" class="ml-2" @click="search">
                 <v-icon>mdi-magnify</v-icon>
                 Pesquisar
               </v-btn>
@@ -50,6 +50,7 @@ const router = useRouter();
 const studentStore = useStudentStore();
 const confirmDialog = ref(null);
 const dialogMessage = ref('');
+const searchQuery = ref('');
 
 const headersOfTable = [
   { title: 'Registro Acadêmico', key: 'ra' },
@@ -65,6 +66,16 @@ const navigateToStudentForm = () => {
 onMounted(() => {
   studentStore.getStudentsList();
 });
+
+const search = () => {
+  // Chama a nova action para buscar os alunos por nome
+  if (searchQuery.value) {
+    studentStore.searchStudents(searchQuery.value);
+  } else {
+    // Se o campo de pesquisa estiver vazio, carrega a lista completa
+    studentStore.getStudentsList();
+  }
+};
 
 const editStudent = (student) => {
   studentStore.setStudentSelected(student)

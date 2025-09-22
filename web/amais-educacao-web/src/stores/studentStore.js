@@ -82,5 +82,19 @@ export const useStudentStore = defineStore("student", {
     setStudentSelected(student) {
       this.studentSelected = student;
     },
+    async searchStudents(name) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_API_URL}/Student/GetStudentsByNameAsync?name=${name}`
+        );
+        this.students = response.data;
+      } catch (error) {
+        this.error = `Ocorreu um erro ao buscar os alunos:${error}`;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 });

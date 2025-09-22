@@ -2,7 +2,7 @@ using AmaisEducacao.API.Services;
 using AmaisEducacao.API.Services.Interfaces;
 using AmaisEducacao.Data.Context;
 using AmaisEducacao.Data.Repositories;
-using AmaisEducacao.Data.Repositories.Interfaces;
+using AmaisEducacao.Domain.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +28,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 #endregion
-
 
 #region CONFIGURAÇÃO DO BANCO DE DADOS
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

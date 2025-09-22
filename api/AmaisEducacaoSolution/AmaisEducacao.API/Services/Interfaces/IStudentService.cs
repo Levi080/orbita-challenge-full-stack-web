@@ -13,5 +13,7 @@ namespace AmaisEducacao.API.Services.Interfaces
         Task<Student> UpdateStudentAsync(Student student);
 
         Task<bool> DeleteStudentAsync(string ra);
+
+        Task<IEnumerable<Student>> GetStudentsByNameAsync(string name);
     }
 }
